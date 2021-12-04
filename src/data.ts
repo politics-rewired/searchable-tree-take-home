@@ -1,32 +1,26 @@
-export type Form = {
-  displayName: string;
-  systemName: string;
+export interface NamedEntity {
+  displayName: string
+  systemName: string
+}
+
+export interface Form extends NamedEntity  {
+  public: boolean
+}
+
+export type Column = NamedEntity
+
+export interface View extends NamedEntity{
   public: boolean;
 };
 
-export type Column = {
-  displayName: string;
-  systemName: string;
-};
-
-export type View = {
-  displayName: string;
-  systemName: string;
-  public: boolean;
-};
-
-export type Table = {
-  displayName: string;
-  systemName: string;
+export interface Table extends NamedEntity {
   columns: Column[];
   forms: Form[];
   views: View[];
   public: boolean;
 };
 
-export type Schema = {
-  displayName: string;
-  systemName: string;
+export interface Schema extends NamedEntity {
   tables: Table[];
   public: boolean;
 };

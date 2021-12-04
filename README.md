@@ -1,3 +1,13 @@
+# Will Pickard Submission
+Hope I did everything to the requirements, didn't 100% understand how you wanted me to build the tree data structure from the Schema type. 
+
+I know you said I didn't need to modify data.ts but I added an interface to represent entities with a displayName and systemName, this made reusing the types easier to work with. 
+
+The search function could be improved. It's just your basic token search.
+
+I would like to add the functionality to open the tree to a leaf when the search only matches that leaf and the leaf is not displayed. 
+
+
 # Rewired Searchable Tree Take Home 
 
 Assemble is a browser based application that has a number of complex user interactions. 
