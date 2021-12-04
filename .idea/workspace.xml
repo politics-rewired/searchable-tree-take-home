@@ -39,7 +39,7 @@
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="yarn" />
-    <property name="ts.external.directory.path" value="C:\Users\will.pickard\git\searchable-tree-take-home\node_modules\typescript\lib" />
+    <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\WebStorm 2020.1.4\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -51,7 +51,7 @@
       <option name="presentableId" value="Default" />
       <updated>1638588302738</updated>
       <workItem from="1638588306117" duration="10202000" />
-      <workItem from="1638650618471" duration="1366000" />
+      <workItem from="1638650618471" duration="1682000" />
     </task>
     <servers />
   </component>
