@@ -39,7 +39,7 @@ const filter = (currentNode, searchTerm, onlyPublic) => {
 const search = (data, searchTerm = '', onlyPublic = false) => {
   var cloned = JSON.parse(JSON.stringify(data));
 
-  cloned.map(schema => filter(schema, searchTerm.trim().toLowerCase(), onlyPublic));
+  cloned.forEach(schema => filter(schema, searchTerm.trim().toLowerCase(), onlyPublic));
 
   return cloned;
 };
