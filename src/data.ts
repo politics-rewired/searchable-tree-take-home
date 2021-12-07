@@ -31,7 +31,7 @@ export type Schema = {
   public: boolean;
 };
 
-const addSystemNameAndRandomPulic = <T extends { displayName: string }>(
+const addSystemNameAndRandomPublic = <T extends { displayName: string }>(
   item: T
 ): T & { systemName: string; public: boolean } => {
   return {
@@ -63,7 +63,7 @@ export const testData: Schema[] = [
           { displayName: "Industry" },
         ].map(addSystemName),
         forms: [{ displayName: "Get Help Organizing Your Workplace" }].map(
-          addSystemNameAndRandomPulic
+          addSystemNameAndRandomPublic
         ),
         views: [
           { displayName: "Needs Initial Contact" },
@@ -71,7 +71,7 @@ export const testData: Schema[] = [
           { displayName: "Active Campaigns - Logistics" },
           { displayName: "Active Campaigns - Food Service" },
           { displayName: "Active Campaigns - Non profits" },
-        ].map(addSystemNameAndRandomPulic),
+        ].map(addSystemNameAndRandomPublic),
       },
       {
         displayName: "Volunteers",
@@ -84,8 +84,8 @@ export const testData: Schema[] = [
         forms: [
           { displayName: "Join the Calling Team" },
           { displayName: "Join the Outreach Team" },
-        ].map(addSystemNameAndRandomPulic),
-        views: [{ displayName: "Needs 1-1" }].map(addSystemNameAndRandomPulic),
+        ].map(addSystemNameAndRandomPublic),
+        views: [{ displayName: "Needs 1-1" }].map(addSystemNameAndRandomPublic),
       },
       {
         displayName: "Contact Logs",
@@ -98,8 +98,8 @@ export const testData: Schema[] = [
         forms: [
           { displayName: "Record a Initial Outreach Conversation" },
           { displayName: "Record a Campaign Update" },
-        ].map(addSystemNameAndRandomPulic),
-        views: [].map(addSystemNameAndRandomPulic),
+        ].map(addSystemNameAndRandomPublic),
+        views: [].map(addSystemNameAndRandomPublic),
       },
       {
         displayName: "Events",
@@ -113,15 +113,15 @@ export const testData: Schema[] = [
         forms: [
           { displayName: "RSVP to An Event" },
           { displayName: "Host an Event" },
-        ].map(addSystemNameAndRandomPulic),
+        ].map(addSystemNameAndRandomPublic),
         views: [
           { displayName: "Upcoming Events" },
           { displayName: "Past Events" },
           { displayName: "Recurring Events" },
           { displayName: "Events Hosted by Volunteers" },
-        ].map(addSystemNameAndRandomPulic),
+        ].map(addSystemNameAndRandomPublic),
       },
-    ].map(addSystemNameAndRandomPulic),
+    ].map(addSystemNameAndRandomPublic),
   },
   {
     displayName: "Gene Parmesan for Congress",
@@ -136,12 +136,12 @@ export const testData: Schema[] = [
           { displayName: "Activity Status" },
         ].map(addSystemName),
         forms: [{ displayName: "Sign Up to Volunteer" }].map(
-          addSystemNameAndRandomPulic
+          addSystemNameAndRandomPublic
         ),
         views: [
           { displayName: "To Onboard" },
           { displayName: "Inactive - To Re-Engage" },
-        ].map(addSystemNameAndRandomPulic),
+        ].map(addSystemNameAndRandomPublic),
       },
       {
         displayName: "Voters",
@@ -153,13 +153,13 @@ export const testData: Schema[] = [
           { displayName: "Age" },
           { displayName: "Support Score" },
         ].map(addSystemName),
-        forms: [].map(addSystemNameAndRandomPulic),
+        forms: [].map(addSystemNameAndRandomPublic),
         views: [
           { displayName: "Already VOTED" },
           { displayName: "GOTV Universe" },
           { displayName: "Persuasion Universe" },
-        ].map(addSystemNameAndRandomPulic),
+        ].map(addSystemNameAndRandomPublic),
       },
-    ].map(addSystemNameAndRandomPulic),
+    ].map(addSystemNameAndRandomPublic),
   },
-].map(addSystemNameAndRandomPulic);
+].map(addSystemNameAndRandomPublic);
