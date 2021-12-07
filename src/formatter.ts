@@ -1,52 +1,52 @@
 import { Schema } from "./data";
 
-const format = (data: Schema[]) => {
-  return data.map((schema, schemaIndex) => {
+export const dataFormatter = (data: Schema[]) : any[] => {
+  return data.map(schema => {
+    const { tables, ...schemaRest } = schema;
+
     return {
-      title: schema.displayName,
-      key: `${schema.systemName}-${schemaIndex}-node`,
-      // icon: <FormIcon />,
-      children: schema.tables.map((table) => {
+      ...schemaRest,
+      children: tables.map(table => {
+        const { forms, views, columns, ...tableRest } = table;
+
         return {
-          title: table.displayName,
-          key: `${schema.systemName}-${table.systemName}-table`,
+          ...tableRest,
           children: [
             {
-              title: "Forms",
-              key: `${schema.systemName}-${table.systemName}-forms`,
-              children: table.forms.map((form) => {
-                return {
-                  title: form.displayName,
-                  key: `${schema.systemName}-${table.systemName}-${form.systemName}`
-                }
-              }),
+              displayName: "Forms",
+              systemName: "forms",
+              children: forms
             },
             {
-              title: "Views",
-              key: `${schema.systemName}-${table.systemName}-views`,
-              children: table.views.map((view) => {
-                return {
-                  title: view.displayName,
-                  key: `${schema.systemName}-${table.systemName}-${view.systemName}`
-                }
-              }),
+              displayName: "Views",
+              systemName: "views",
+              children: views
             },
             {
-              title: "Columns",
-              key: `${schema.systemName}-${table.systemName}-cols`,
-              children: table.columns.map((column, colIndex) => {
-                return {
-                  title: column.displayName,
-                  key: `col-${column.systemName}-${colIndex}`,
-                  // icon: <ColumnIcon />
-                }
-              })
+              displayName: "Columns",
+              systemName: "columns",
+              children: columns
             }
           ]
         }
       })
-    };
-  });
+    }
+  })
 };
 
-export default format;
+const generateTreeFormat = (items, parentKey = 'schema') => {
+  return items.map((item, index) => {
+    let key = `${parentKey}-${item.systemName}-${index}`
+    let result = { title: item.displayName, key }
+
+    if (item.hasOwnProperty('children') && item.children.length) {
+      result['children'] = generateTreeFormat(item.children, key)
+    }
+
+    return result
+  })
+}
+
+export const treeFormatter = (data: any[]) => {
+  return generateTreeFormat(data);
+}

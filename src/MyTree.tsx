@@ -1,14 +1,15 @@
+import React from "react";
 import { Tree } from "antd";
-import { Schema } from "./data";
 import {
   FormOutlined,
   // TableOutlined,
   // FilterOutlined,
   NumberOutlined,
 } from "@ant-design/icons";
-import format from "./formatter";
-import React from "react";
+
+import { Schema } from "./data";
 import { search } from "./search";
+import { dataFormatter, treeFormatter } from "./formatter";
 
 type MyTreeProps = {
   data: Schema[];
@@ -21,8 +22,9 @@ const FormIcon = FormOutlined;
 const ColumnIcon = NumberOutlined;
 
 export const MyTree = (props: MyTreeProps) => {
-  const treeData = format(props.data);
-  const filteredData = search(treeData, props.searchTerm);
+  const formattedData = dataFormatter(props.data);
+  const filteredData = search(formattedData, props.searchTerm);
+  const treeData = treeFormatter(filteredData);
 
-  return <Tree showIcon treeData={filteredData} autoExpandParent={true} />;
+  return <Tree showIcon treeData={treeData} autoExpandParent={true} />;
 };
