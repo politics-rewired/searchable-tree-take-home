@@ -1,8 +1,13 @@
-const filter = (currentNode, searchTerm) => {
+const checkMatch = (value, searchTerm) => value.toLowerCase().includes(searchTerm);
+
+const filter = (currentNode, searchTerm, onlyPublic) => {
   let newChildren = [];
+  let isPublic = true;
+  let result = false;
+  let hasChildren;
 
   currentNode.hasOwnProperty("children") && currentNode.children.forEach(child => {
-    let keepChild = filter(child, searchTerm);
+    let keepChild = filter(child, searchTerm, onlyPublic);
 
     if (keepChild) {
       newChildren.push(child);
@@ -13,25 +18,30 @@ const filter = (currentNode, searchTerm) => {
     currentNode.children = newChildren;
   }
 
-  let result = (
-    currentNode.systemName.toLowerCase().includes(searchTerm) ||
-    currentNode.displayName.toLowerCase().includes(searchTerm) ||
-    (currentNode.hasOwnProperty("children") && currentNode.children.length)
+  hasChildren = (currentNode.hasOwnProperty("children") && currentNode.children.length);
+
+  let matched = (
+    searchTerm === '' ||
+    checkMatch(currentNode.systemName, searchTerm) ||
+    checkMatch(currentNode.displayName, searchTerm) ||
+    hasChildren
   );
 
-  return !!result;
-}
+  isPublic = (currentNode.hasOwnProperty('public')) ? currentNode.public : true;
 
-const search = (data, searchTerm = '') => {
-  if (searchTerm.trim() === '') {
-    return data;
+  if (!!matched) {
+    result = onlyPublic ? isPublic : true;
   }
 
+  return result;
+};
+
+const search = (data, searchTerm = '', onlyPublic = false) => {
   var cloned = JSON.parse(JSON.stringify(data));
 
-  cloned.map(schema => filter(schema, searchTerm.toLowerCase()));
+  cloned.map(schema => filter(schema, searchTerm.trim().toLowerCase(), onlyPublic));
 
   return cloned;
-}
+};
 
 export { search };

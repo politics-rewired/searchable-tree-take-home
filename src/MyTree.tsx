@@ -14,6 +14,8 @@ import { dataFormatter, treeFormatter } from "./formatter";
 type MyTreeProps = {
   data: Schema[];
   searchTerm?: string;
+  onlyPublic?: boolean;
+  showIcons?: boolean;
 };
 
 const FormIcon = FormOutlined;
@@ -23,7 +25,7 @@ const ColumnIcon = NumberOutlined;
 
 export const MyTree = (props: MyTreeProps) => {
   const formattedData = dataFormatter(props.data);
-  const filteredData = search(formattedData, props.searchTerm);
+  const filteredData = search(formattedData, props.searchTerm, props.onlyPublic);
   const treeData = treeFormatter(filteredData);
 
   return <Tree showIcon treeData={treeData} autoExpandParent={true} />;

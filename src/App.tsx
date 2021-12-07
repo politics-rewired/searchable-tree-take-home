@@ -47,23 +47,26 @@ function App() {
               <br />
               <MyTree data={testData} searchTerm={firstSearch} />
             </Panel>
+
             <Panel header="2. With Public Filter" key="with-public">
               <Checkbox
                 onChange={onPublicCheckboxChange}
-                value={publicResultsOnly}
+                checked={publicResultsOnly}
               >
                 Only Include Public Objects?
               </Checkbox>
               <Input onChange={onSecondInputChange} value={secondSearch} />
               <br />
-              <MyTree data={testData} />
+              <MyTree data={testData} searchTerm={secondSearch} onlyPublic={publicResultsOnly} />
             </Panel>
+
             <Panel header="3. With Type Icons" key="with-icons">
               <Input onChange={onThirdInputChange} value={thirdSearch} />
               <br />
               <MyTree data={testData} />
             </Panel>
-            <Panel header="4. With System Name in Parenthesis" key="with-icons">
+
+            <Panel header="4. With System Name in Parenthesis" key="with-system-name">
               <Input onChange={onFourthInputChange} value={fourthSearch} />
               <br />
               <MyTree data={testData} />

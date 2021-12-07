@@ -31,22 +31,22 @@ export const dataFormatter = (data: Schema[]) : any[] => {
         }
       })
     }
-  })
+  });
 };
 
 const generateTreeFormat = (items, parentKey = 'schema') => {
   return items.map((item, index) => {
-    let key = `${parentKey}-${item.systemName}-${index}`
-    let result = { title: item.displayName, key }
+    let key = `${parentKey}-${item.systemName}-${index}`;
+    let result = { title: item.displayName, key };
 
     if (item.hasOwnProperty('children') && item.children.length) {
-      result['children'] = generateTreeFormat(item.children, key)
+      result['children'] = generateTreeFormat(item.children, key);
     }
 
-    return result
-  })
-}
+    return result;
+  });
+};
 
 export const treeFormatter = (data: any[]) => {
   return generateTreeFormat(data);
-}
+};
