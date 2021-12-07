@@ -6,10 +6,13 @@ import {
   // FilterOutlined,
   NumberOutlined,
 } from "@ant-design/icons";
+import format from "./formatter";
 import React from "react";
+import { search } from "./search";
 
 type MyTreeProps = {
   data: Schema[];
+  searchTerm?: string;
 };
 
 const FormIcon = FormOutlined;
@@ -18,54 +21,8 @@ const FormIcon = FormOutlined;
 const ColumnIcon = NumberOutlined;
 
 export const MyTree = (props: MyTreeProps) => {
-  const data = props.data.map((schema, schemaIndex) => {
-    return {
-      title: schema.displayName,
-      key: `${schema.systemName}-${schemaIndex}-node`,
-      icon: <FormIcon />,
-      children: schema.tables.map((table) => {
-        return {
-          title: table.displayName,
-          key: `${schema.systemName}-${table.systemName}-table`,
-          children: [
-            {
-              title: "Forms",
-              key: `${schema.systemName}-${table.systemName}-forms`,
-              children: table.forms.map((form) => {
-                return {
-                  title: form.displayName,
-                  key: `${schema.systemName}-${table.systemName}-${form.systemName}`
-                }
-              }),
-            },
-            {
-              title: "Views",
-              key: `${schema.systemName}-${table.systemName}-views`,
-              children: table.views.map((view) => {
-                return {
-                  title: view.displayName,
-                  key: `${schema.systemName}-${table.systemName}-${view.systemName}`
-                }
-              }),
-            },
-            {
-              title: "Columns",
-              key: `${schema.systemName}-${table.systemName}-cols`,
-              children: table.columns.map((column, colIndex) => {
-                return {
-                  title: column.displayName,
-                  key: `col-${column.systemName}-${colIndex}`,
-                  icon: <ColumnIcon />
-                }
-              })
-            }
-          ]
-        }
-      })
-    };
-  });
+  const treeData = format(props.data);
+  const filteredData = search(treeData, props.searchTerm);
 
-  const treeData = data;
-
-  return <Tree showIcon treeData={treeData} autoExpandParent={true} />;
+  return <Tree showIcon treeData={filteredData} autoExpandParent={true} />;
 };

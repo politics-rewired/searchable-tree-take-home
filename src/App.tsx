@@ -45,7 +45,7 @@ function App() {
             <Panel header="1. Basic" key="basic">
               <Input onChange={onFirstInputChange} value={firstSearch} />
               <br />
-              <MyTree data={testData} />
+              <MyTree data={testData} searchTerm={firstSearch} />
             </Panel>
             <Panel header="2. With Public Filter" key="with-public">
               <Checkbox

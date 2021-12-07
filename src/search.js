@@ -14,18 +14,22 @@ const filter = (currentNode, searchTerm) => {
   }
 
   let result = (
-    currentNode.systemName === searchTerm ||
-    currentNode.displayName === searchTerm ||
+    currentNode.systemName.toLowerCase().includes(searchTerm) ||
+    currentNode.displayName.toLowerCase().includes(searchTerm) ||
     (currentNode.hasOwnProperty("children") && currentNode.children.length)
   );
 
   return !!result;
 }
 
-const search = (data, searchTerm) => {
+const search = (data, searchTerm = '') => {
+  if (searchTerm.trim() === '') {
+    return data;
+  }
+
   var cloned = JSON.parse(JSON.stringify(data));
 
-  cloned.map(schema => filter(schema, searchTerm));
+  cloned.map(schema => filter(schema, searchTerm.toLowerCase()));
 
   return cloned;
 }
