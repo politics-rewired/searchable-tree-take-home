@@ -1,3 +1,11 @@
+import React from "react";
+import {
+  FormOutlined,
+  TableOutlined,
+  FilterOutlined,
+  NumberOutlined,
+} from "@ant-design/icons";
+
 import { Schema } from "./data";
 
 export const dataFormatter = (data: Schema[]) : any[] => {
@@ -34,19 +42,43 @@ export const dataFormatter = (data: Schema[]) : any[] => {
   });
 };
 
-const generateTreeFormat = (items, parentKey = 'schema') => {
+const generateTreeFormat = (items, showIcons, parentKey = 'schema') => {
   return items.map((item, index) => {
     let key = `${parentKey}-${item.systemName}-${index}`;
     let result = { title: item.displayName, key };
 
+    if (showIcons) {
+      let Icon;
+
+      if (parentKey === 'schema') {
+        Icon = TableOutlined;
+      }
+
+      if (item.systemName === 'forms') {
+        Icon = FormOutlined;
+      }
+
+      if (item.systemName === 'views') {
+        Icon = FilterOutlined;
+      }
+
+      if (item.systemName === 'columns') {
+        Icon = NumberOutlined;
+      }
+
+      if (Icon) {
+        result['icon'] = <Icon />;
+      }
+    }
+
     if (item.hasOwnProperty('children') && item.children.length) {
-      result['children'] = generateTreeFormat(item.children, key);
+      result['children'] = generateTreeFormat(item.children, showIcons, key);
     }
 
     return result;
   });
 };
 
-export const treeFormatter = (data: any[]) => {
-  return generateTreeFormat(data);
+export const treeFormatter = (data: any[], showIcons: boolean) => {
+  return generateTreeFormat(data, showIcons);
 };
