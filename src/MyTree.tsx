@@ -10,12 +10,13 @@ type MyTreeProps = {
   searchTerm?: string;
   onlyPublic?: boolean;
   showIcons?: boolean;
+  withSystemName?: boolean;
 };
 
 export const MyTree = (props: MyTreeProps) => {
   const formattedData = dataFormatter(props.data);
   const filteredData = search(formattedData, props.searchTerm, props.onlyPublic);
-  const treeData = treeFormatter(filteredData, props.showIcons);
+  const treeData = treeFormatter(filteredData, props.showIcons, props.withSystemName);
 
   return <Tree showIcon treeData={treeData} autoExpandParent={true} />;
 };

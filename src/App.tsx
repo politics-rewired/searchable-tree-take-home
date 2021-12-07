@@ -63,13 +63,13 @@ function App() {
             <Panel header="3. With Type Icons" key="with-icons">
               <Input onChange={onThirdInputChange} value={thirdSearch} />
               <br />
-              <MyTree data={testData} showIcons />
+              <MyTree data={testData} searchTerm={thirdSearch} showIcons />
             </Panel>
 
             <Panel header="4. With System Name in Parenthesis" key="with-system-name">
               <Input onChange={onFourthInputChange} value={fourthSearch} />
               <br />
-              <MyTree data={testData} />
+              <MyTree data={testData} searchTerm={fourthSearch} withSystemName />
             </Panel>
           </Collapse>
         </Card>

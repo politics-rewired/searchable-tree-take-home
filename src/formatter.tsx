@@ -42,10 +42,14 @@ export const dataFormatter = (data: Schema[]) : any[] => {
   });
 };
 
-const generateTreeFormat = (items, showIcons, parentKey = 'schema') => {
+const generateTreeFormat = (items, showIcons, withSystemName, parentKey = 'schema') => {
   return items.map((item, index) => {
     let key = `${parentKey}-${item.systemName}-${index}`;
     let result = { title: item.displayName, key };
+
+    if (withSystemName) {
+      result.title = `${result.title} (${item.systemName})`;
+    }
 
     if (showIcons) {
       let Icon;
@@ -72,13 +76,13 @@ const generateTreeFormat = (items, showIcons, parentKey = 'schema') => {
     }
 
     if (item.hasOwnProperty('children') && item.children.length) {
-      result['children'] = generateTreeFormat(item.children, showIcons, key);
+      result['children'] = generateTreeFormat(item.children, showIcons, withSystemName, key);
     }
 
     return result;
   });
 };
 
-export const treeFormatter = (data: any[], showIcons: boolean) => {
-  return generateTreeFormat(data, showIcons);
+export const treeFormatter = (data: any[], showIcons: boolean, withSystemName: boolean) => {
+  return generateTreeFormat(data, showIcons, withSystemName);
 };
